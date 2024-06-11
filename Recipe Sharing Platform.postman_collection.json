@@ -1,0 +1,436 @@
+{
+	"info": {
+		"_postman_id": "0f547350-08e4-476d-a96a-34133b26763c",
+		"name": "Recipe Sharing Platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31220714"
+	},
+	"item": [
+		{
+			"name": "Registration",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"justemail@gmail.com\",\r\n    \"password\": \"Admin@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}api/accounts/register/",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"accounts",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonResponse = pm.response.json();\r",
+							"    var newToken = jsonResponse.token; // Adjust according to your API's response format\r",
+							"    pm.environment.set(\"token\", newToken);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\" : \"justemail@gmail.com\",\r\n    \"password\": \"Admin@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}api/accounts/login/",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"accounts",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "User Profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}api/accounts/profile/",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"accounts",
+						"profile",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Related Recipe",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}api/recipe/",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"recipe",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Recipe",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Chicken Curry2\",\r\n    \"description\": \"A flavorful and spicy chicken curry.\",\r\n    \"ingredients\": \"Chicken, curry powder, coconut milk, onion, garlic, ginger, salt, pepper\",\r\n    \"preparation_steps\": \"1. Cook the chicken.\\n2. Prepare the curry sauce.\\n3. Mix and serve.\",\r\n    \"cooking_time\": 45,\r\n    \"serving_size\": 4,\r\n    \"categories\": [1, 2]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}api/recipe/",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"recipe",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get One Recipe",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}api/recipe/5/",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"recipe",
+						"5",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update By Put Recipe",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Spaghetti Bolognese\",\r\n    \"description\": \"A classic Italian pasta dish.\",\r\n    \"ingredients\": \"Spaghetti, minced beef, tomato sauce, onion, garlic, olive oil, salt, pepper\",\r\n    \"preparation_steps\": \"1. Cook the spaghetti.\\r\\n2. Prepare the sauce.\\r\\n3. Mix and serve.\",\r\n    \"cooking_time\": 30,\r\n    \"serving_size\": 5,\r\n    \"categories\": [1, 2]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}api/recipe/4/",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"recipe",
+						"4",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update By Patch",
+			"request": {
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Spaghetti Bolognese Updated\",\r\n    \"categories\": [1, 3]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}api/recipe/4/",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"recipe",
+						"4",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Recipe",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}"
+					}
+				],
+				"url": {
+					"raw": "{{url}}api/recipe/1/",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"recipe",
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/recipe/recipe-category/",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"recipe",
+						"recipe-category",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Category",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"Dinner2\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}api/recipe/recipe-category/",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"recipe",
+						"recipe-category",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter by Category",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/recipe/search/?category=desserts",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"recipe",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "category",
+							"value": "desserts"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter by ingredients",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/recipe/search/?ingredients=chicken",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"recipe",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "ingredients",
+							"value": "chicken"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Filter by max_cooking_time",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}api/recipe/search/?max_cooking_time=30",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"recipe",
+						"search",
+						""
+					],
+					"query": [
+						{
+							"key": "max_cooking_time",
+							"value": "30"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Review",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{token}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"rating\": 5,\r\n    \"comment\": \"Delicious recipe!\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}api/recipe/5/reviews/",
+					"host": [
+						"{{url}}api"
+					],
+					"path": [
+						"recipe",
+						"5",
+						"reviews",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
